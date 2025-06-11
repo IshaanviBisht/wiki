@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>MiniWiki Home</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=home" />
+  <script src="script.js"></script>
+</head>
+<body>
+  <h1>MiniWiki Home</h1>
+  <form role="search" method="get" action="">
+  <div class="input-container">
+  <input type="search" class="search-input" value="" name="s" placeholder="Search..." />
+  <button type="submit" class="search-submit" name="submit"><i class="material-icons">search</i></button>
+  </div><!-- input-container -->
+  </form><!-- searchform -->
+  
+  <nav>
+    <div class="category">
+    <h2>Languages & Alphabets:</h2>
+    <ul>
+      <li><a href="pages/alphabets.html">English Alphabets</a></li>
+      <li><a href="pages/hindi.html">Hindi Alphabets</a></li>
+      <li><a href="pages/assamese.html">Assamese Alphabets</a></li>
+      <li><a href="pages/bengali.html">Bengali Alphabets</a></li>
+    </ul>
+    </div>
+    
+    <div class="category">
+    <h2>Geography & Politics:</h2>
+    <ul>
+      <li><a href="pages/countries.html">Countries of the World</a></li>
+      <li><a href="pages/presidents.html">Country Presidents</a></li>
+    </ul>
+    </div>
+    
+    <div class="category">
+    <h2>Science & Health:</h2>
+    <ul>
+      <li><a href="pages/bloodgroups.html">Blood Groups</a></li>
+      <li><a href="pages/water-cycle.html">Water Cycle</a></li>
+    </ul>
+    </div>
+    
+    <div class="category">
+    <h2>Mathematics:</h2>
+    <ul>
+      <li><a href="pages/math_operations.html">Basic Math Operations</a></li>
+      <li><a href="pages/types_of_numbers.html">Types of Numbers in Math</a></li>
+    </ul>
+    </div>
+
+    <div class="category">
+      <h2>Cricket:</h2>
+      <ul>
+        <li><a href="pages/ipl-team-owners.html">IPL Teams and Owners</a></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>India:</h2>
+      <ul>
+        <li><a href="pages/all-states-of-india.html">All States of India</a></li>
+        <li><a href="pages/union-territories.html">Union Territories of India</a></li>
+        <li><a href="pages/difference-between-u-and-s.html">Difference between Union Territories and States</a></li>
+        <li><a href="pages/famous-foods-in-indian-states.html">Famous Food in Every State of India</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="footer-wrapper">
+      <footer>
+    <div class="contributors">
+      <div class="contributor-section">
+      <h3>Researchers</h3>
+      <ul class="contributor-list">
+        <li>Arabhi</li>
+        <li>Karthikeya</li>
+        <li>Akhilesh</li>
+      </ul>
+      </div>
+      <div class="contributor-section">
+      <h3>Developers</h3>
+      <ul class="contributor-list">
+        <li><a href="https://github.com/ishaanvibisht" target="_blank">Ishaanvi</a></li>
+      </ul>
+      </div>
+    </div>
+    </footer>
+  </div>
+
+  <script>
+  // Get search elements
+  const searchForm = document.querySelector('form[role="search"]');
+  const searchInput = document.querySelector('.search-input');
+  const categories = document.querySelectorAll('.category');
+  const allLinks = document.querySelectorAll('.category a');
+
+    // Handle search form submission
+  searchForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form from actually submitting
+      performSearch();
+  });
+
+    // Handle real-time search as user types
+  searchInput.addEventListener('input', function() {
+      performSearch();
+  });
+
+  function performSearch() {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+
+      if (searchTerm === '') {
+          // Show all categories and links if search is empty
+          categories.forEach(category => {
+              category.style.display = 'block';
+              const links = category.querySelectorAll('a');
+              links.forEach(link => {
+                  link.parentElement.style.display = 'block';
+              });
+          });
+      return;
+  }
+
+  // Hide all categories initially
+  categories.forEach(category => {
+      category.style.display = 'none';
+      const links = category.querySelectorAll('a');
+      let hasVisibleLinks = false;
+
+  // Check each link in this category
+      links.forEach(link => {
+      const linkText = link.textContent.toLowerCase();
+      if (linkText.includes(searchTerm)) {
+          link.parentElement.style.display = 'block';
+          hasVisibleLinks = true;
+      } else {
+          link.parentElement.style.display = 'none';
+          }
+      });
+      
+      // Show category if it has matching links
+      if (hasVisibleLinks) {
+          category.style.display = 'block';
+      }
+      });
+  }
+
+    // Clear search function (optional)
+      function clearSearch() {
+          searchInput.value = '';
+          performSearch();
+      }
+  </script>
+</body>
+</html>
